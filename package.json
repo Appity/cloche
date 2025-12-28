@@ -29,6 +29,12 @@
     "type": "git",
     "url": "git+https://github.com/appity/cloche.git"
   },
+  "bugs": {
+    "url": "https://github.com/appity/cloche/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
