@@ -1,0 +1,39 @@
+{
+  "name": "@appity/cloche",
+  "version": "0.1.0",
+  "description": "A lightweight process supervisor for development — run, restart, and manage services with ease",
+  "type": "module",
+  "bin": {
+    "cloche": "./src/cli.js"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "process",
+    "supervisor",
+    "service",
+    "manager",
+    "development",
+    "cli",
+    "restart",
+    "daemon"
+  ],
+  "author": "Scott Tadman <tadman@appity.studio>",
+  "homepage": "https://github.com/appity/cloche",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appity/cloche.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "shell-quote": "^1.8.1"
+  }
+}
