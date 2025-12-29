@@ -9,7 +9,7 @@ A lightweight process supervisor for development — run, restart, and manage se
 - **Process listing** — See all managed processes, their status, and listening ports at a glance
 - **Environment management** — Automatically loads `.env` files, with CLI overrides
 - **Persistent scripts** — Commands are saved, so restarting a unit doesn't require re-typing
-- **Log capture** — STDOUT/STDERR saved to searchable logs with ANSI codes stripped
+- **Log capture** — STDOUT/STDERR saved to searchable logs with ANSI codes stripped (colors preserved in terminal)
 - **Log search** — Case-insensitive search with grep-style context (`--after`, `--before`, `--context`)
 - **Log tail** — View last N lines of logs (default 500)
 - **Persistent logging** — Use `--log` for full history without trimming
@@ -176,6 +176,7 @@ Logs are stored in `.cloche/<unit>.log` and are overwritten each time the servic
 - **Shell scripts** — Each unit's command is saved as a shell script (`.cloche/<unit>.sh`), allowing you to restart without re-specifying the command
 - **PID tracking** — cloche writes its own PID to `.cloche/<unit>.pid`, enabling `--kill` and `--restart` operations
 - **Log capture** — STDOUT/STDERR are captured to `.cloche/<unit>.log` with ANSI codes stripped; stderr lines prefixed with `2>` for filtering; auto-trims to 100K lines (unless `--log` is used)
+- **Color support** — When running in a terminal, cloche sets `FORCE_COLOR=1` and `CLICOLOR_FORCE=1` so subprocesses emit colors even though their output is piped; colors display in the terminal but are stripped from logs for clean searching
 - **Signal handling** — `SIGUSR1` and `SIGINFO` (^T on macOS) trigger subprocess restarts; `SIGINT` and `SIGTERM` cleanly shut down
 
 ## Configuration

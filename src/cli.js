@@ -430,6 +430,14 @@ function handleRun(unit, commandParts, options) {
     // Build environment: base process.env + .env file + -e overrides
     const spawnEnv = { ...process.env };
 
+    // If we're running in a TTY, signal to subprocesses that colors are supported.
+    // Since we pipe stdout/stderr for tee, subprocesses can't detect TTY directly.
+    // We set FORCE_COLOR (Node.js/chalk) and CLICOLOR_FORCE (BSD convention).
+    if (process.stdout.isTTY) {
+        spawnEnv.FORCE_COLOR = spawnEnv.FORCE_COLOR ?? '1';
+        spawnEnv.CLICOLOR_FORCE = spawnEnv.CLICOLOR_FORCE ?? '1';
+    }
+
     // Load .env file (auto-load .env by default, or use --env-file path)
     if (options.envFile !== false) {
         const envFilePath = typeof options.envFile === 'string'
