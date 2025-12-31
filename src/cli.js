@@ -409,11 +409,17 @@ function handleRun(unit, commandParts, options) {
 
     // If new command provided, write the script
     if (commandParts && commandParts.length > 0) {
-        const cwd = workdir ? path.resolve(process.cwd(), workdir) : process.cwd();
+        // Use path relative to project root (parent of .cloche) for portability
+        const projectRoot = path.dirname(RUN_DIR);
+        const absoluteCwd = workdir ? path.resolve(process.cwd(), workdir) : process.cwd();
+        const relativeCwd = path.relative(projectRoot, absoluteCwd) || '.';
+        // shell-quote escapes colons which is unnecessary and annoys linters
+        const quotedCommand = quote(commandParts).replace(/\\:/g, ':');
         const scriptContent = [
             '#!/bin/sh',
-            `cd ${quote([cwd])}`,
-            `exec ${quote(commandParts)}`
+            'set -e',
+            `cd "$(dirname "$0")/../${relativeCwd}"`,
+            `exec ${quotedCommand}`
         ].join('\n');
 
         fs.writeFileSync(scriptFile, scriptContent, { mode: 0o755 });
