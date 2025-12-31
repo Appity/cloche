@@ -4,7 +4,7 @@
   "description": "A lightweight process supervisor for development — run, restart, and manage services with ease",
   "type": "module",
   "bin": {
-    "cloche": "./src/cli.js"
+    "cloche": "src/cli.js"
   },
   "files": [
     "src"
